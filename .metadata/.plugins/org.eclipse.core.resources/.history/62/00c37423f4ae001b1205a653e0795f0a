@@ -1,0 +1,9 @@
+package com.com.myapp;
+
+import java.util.Map;
+
+public interface CustomerService {
+
+	String create(Map<String, Object> map);
+
+}

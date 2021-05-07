@@ -1,0 +1,5 @@
+package com.com.myapp;
+
+public interface CustomerService {
+
+}

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="customer">
+
+
+<insert id="insert" parameterType="hashMap" useGeneratedKeys="true" keyProperty="id">  
+    <![CDATA[
+    insert into customer_spring_mvc
+    (name, age, adress) 
+    values
+    (#{name}, #{age}, #{adress})
+    ]]>
+</insert>
+
+
+<select id="select_detail" parameterType="hashMap" resultType="hashMap">
+    <![CDATA[
+        select
+        name,
+        age,
+        adress,
+ 		insert_date
+        from
+        customer_spring_mvc
+        where
+        id = #{id}   
+    ]]>
+</select>
+
+
+
+<update id="update" parameterType="hashMap">  
+	<![CDATA[  
+		update customer_spring_mvc set  
+		name = #{name},  
+		age = #{age},  
+		adress = #{adress}  
+		where  
+		id = #{id}  
+	]]>  
+</update>  
+
+
+
+<delete id="delete" parameterType="hashMap">  
+	<![CDATA[  
+		delete from customer_spring_mvc  
+		where  
+		id = #{id}  
+	]]>  
+</delete>  
+
+<select id="select_list" parameterType="hashMap" resultType="hashMap">  
+	<![CDATA[  
+		select  
+		id,  
+		name,  
+		age,  
+		adress,  
+		insert_date  
+		from  
+		customer_spring_mvc  
+		order by insert_date desc  
+	]]>  
+</select>  
+
+
+</mapper>

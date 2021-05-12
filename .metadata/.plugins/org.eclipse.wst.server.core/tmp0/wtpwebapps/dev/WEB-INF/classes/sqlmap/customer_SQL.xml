@@ -78,11 +78,59 @@
 		where 1 = 1  
 	]]>  
 		<if test="keyword != null and keyword != ''">  
-			and (name like CONCAT('%',#{keyword},'%') or age like CONCAT('%',#{keyword},'%'))  
+			and (name like CONCAT('%',#{keyword},'%'))
 		</if>  
 		order by insert_date desc  
 </select>  
-
-
+<select id="search_list2" parameterType="hashMap" resultType="hashMap">  
+	<![CDATA[  
+		select  
+		id,  
+		name,  
+		age,  
+		adress,  
+		insert_date  
+		from  
+		customer_spring_mvc  
+		where 1 = 1  
+	]]>  
+		<if test="keyword2 != null and keyword2 != ''">  
+			and (insert_date like CONCAT('%',#{keyword2},'%'))
+		</if>  
+		order by insert_date desc  
+</select>
+<select id="search_list3" parameterType="hashMap" resultType="hashMap">  
+	<![CDATA[  
+		select  
+		id,  
+		name,  
+		age,  
+		adress,  
+		insert_date,
+		TIMESTAMPDIFF(HOUR,insert_date,NOW()) AS time  
+		from  
+		customer_spring_mvc  
+		where 1 = 1  
+	]]>  
+		<if test="keyword3=='no'">  
+			and 2=2
+		</if>  
+		<if test="keyword3=='1h'">  
+			and (insert_date > DATE_SUB(NOW(),INTERVAL 1 hour))
+		</if> 
+		<if test="keyword3=='1d'">  
+			and (insert_date > DATE_SUB(NOW(),INTERVAL 1 day))
+		</if>  
+		<if test="keyword3=='3d'">  
+			and (insert_date > DATE_SUB(NOW(),INTERVAL 3 day))
+		</if> 
+		<if test="keyword3=='7d'">   
+			and (insert_date > DATE_SUB(NOW(),INTERVAL 7 day))
+		</if> 
+		<if test="keyword3=='30d'">  
+			and (insert_date > DATE_SUB(NOW(),INTERVAL 30 day))
+		</if> 
+		order by insert_date desc  
+</select>
 
 </mapper>

@@ -5,7 +5,9 @@
 	<head>
 		<title>고객 상세</title>
 	</head>
+	<center>
 	<body>
+		<button type="button" onclick="location.href='http://localhost:8080/' ">홈으로 바로이동</button>
 	  <h1>고객 상세</h1>
 	  <body>
 	  	<table border="1">
@@ -39,4 +41,5 @@
 	   <a href="/list">목록으로</a>
 	  </p>
  </body>
+ </center>
 </html>

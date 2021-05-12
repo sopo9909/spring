@@ -17,4 +17,8 @@ public interface CustomerService {
 
 	List<Map<String, Object>> search(Map<String, Object> map);
 
+	List<Map<String, Object>> search2(Map<String, Object> map);
+
+	List<Map<String, Object>> search3(Map<String, Object> map);
+
 }

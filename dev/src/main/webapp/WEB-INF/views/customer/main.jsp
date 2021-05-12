@@ -18,5 +18,13 @@
 	   <p style="font-size:100px;">
 	   <a href="/search">회원 정보 검색</a>
 	   </p></center>
+	   	   <center>
+	   <p style="font-size:100px;">
+	   <a href="/search2">날짜로 회원 검색</a>
+	   </p></center>
+	      <center>
+	   <p style="font-size:100px;">
+	   <a href="/search3">날짜로 회원 검색2</a>
+	   </p></center>
 </body>
 </html>

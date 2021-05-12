@@ -93,4 +93,26 @@ public class CustomerController {
 		mav.setViewName("/customer/search");  
 		return mav;  
 	}  
+	@RequestMapping(value = "/search2")  
+	public ModelAndView search2(@RequestParam Map<String, Object> map) {  
+		List<Map<String, Object>> list = this.customerService.search2(map);  
+		ModelAndView mav = new ModelAndView();  
+		mav.addObject("data", list);  
+		if(map.containsKey("keyword2")) {
+			mav.addObject("keyword2",map.get("keyword2"));
+		}
+		mav.setViewName("/customer/search2");  
+		return mav;  
+	} 
+	@RequestMapping(value = "/search3")  
+	public ModelAndView search3(@RequestParam Map<String, Object> map) {  
+		List<Map<String, Object>> list = this.customerService.search3(map);  
+		ModelAndView mav = new ModelAndView();  
+		mav.addObject("data", list);  
+		if(map.containsKey("keyword3")) {
+			mav.addObject("keyword3",map.get("keyword3"));
+		}
+		mav.setViewName("/customer/search3");  
+		return mav;  
+	} 
 }

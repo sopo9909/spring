@@ -34,6 +34,5 @@ public class CustomerDao {
 		}
 	public List<Map<String, Object>> searchList3(Map<String, Object> map) {  
 		return this.sqlSessionTemplate.selectList("customer.search_list3", map);  
-		}
-	
+		}	
 }

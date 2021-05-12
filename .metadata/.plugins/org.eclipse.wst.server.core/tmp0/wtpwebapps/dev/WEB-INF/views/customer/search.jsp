@@ -10,6 +10,7 @@
 	<body>
 		<button type="button" onclick="location.href='http://localhost:8080/' ">홈으로 바로이동</button>  
 		<h1>회원 검색</h1>
+		<hr width = "100%">
 		<p>  
 			<form>  
 				<input type="text" placeholder="이름으로 검색" name="keyword" value="${keyword}" />  
@@ -18,7 +19,7 @@
 		</p>   
 		<table>  
 			<thead>  
-				<tr>  
+				<tr><td>순서</td>
 					<td>이름</td>  
 					<td>나이</td>  
 					<td>주소</td>  
@@ -27,7 +28,9 @@
 			</thead>  
 		<tbody>  
 			<c:forEach var="row" items="${data}">  
-				<tr>  
+				<tr> 
+					<td>${row.id }
+					</td>  
 					<td>  
 						<a href="/detail?id=${row.id}">  
 							${row.name}  

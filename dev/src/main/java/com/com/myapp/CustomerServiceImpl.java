@@ -52,4 +52,5 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<Map<String, Object>> search3(Map<String, Object> map){  
 	return this.customerDao.searchList3(map);  
 	}
+
 }

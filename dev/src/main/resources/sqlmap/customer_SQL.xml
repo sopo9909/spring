@@ -132,5 +132,22 @@
 		</if> 
 		order by insert_date desc  
 </select>
-
+<!-- 게시물 총 갯수 -->
+<select id="count" resultType="int">
+	select count(id) from customer_spring_mvc
+</select>
+<!-- 게시물 총 갯수 -->
+<select id ="listPage" parameterType="hashMap" resultType="hashMap">
+	select 
+	id,
+	name,
+	age,
+	adress,
+	insert_date,
+	TIMESTAMPDIFF(HOUR,insert_date,NOW()) AS time from
+	from 
+	customer_spring_mvc
+	order by insert_date
+	limit #{displayPost},#{postNum}
+</select>
 </mapper>

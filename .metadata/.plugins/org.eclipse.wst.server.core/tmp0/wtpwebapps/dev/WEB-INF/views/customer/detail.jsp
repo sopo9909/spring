@@ -31,14 +31,14 @@
 	  	</tr>
 	  	</table>
 	  <p>
-	   <a href="/update?id=${id}">수정</a>
+	  <button type="button" onclick="location.href='http://localhost:8080/update?id=${id}' ">수정</button>
 	  </p>
 		<form method="POST" action="/delete">
 			<input type="hidden" name="id" value="${id}" />
 			<input type="submit" value="삭제" />
 		</form>
 	  <p>
-	   <a href="/list">목록으로</a>
+	  <button type="button" onclick="location.href='http://localhost:8080/list' ">목록으로</button>
 	  </p>
  </body>
  </center>

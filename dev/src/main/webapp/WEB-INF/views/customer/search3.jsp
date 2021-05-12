@@ -62,6 +62,7 @@ function timeBefore(){
 	<body>
 		<button type="button" onclick="location.href='http://localhost:8080/' ">홈으로 바로이동</button>  
 		<h1 class="animate__animated animate__bounce">날짜로 회원 검색2</h1>
+		<hr width = "100%">
 		<blink><p ><b> 시작한 시간 => 2021년 5월 11일 16:01:17</b></p></blink>
  		<p class="sub"></p>
   
@@ -81,6 +82,7 @@ function timeBefore(){
 		<table>  
 			<thead>  
 				<tr>  
+					<td>순서</td>
 					<td>이름</td>  
 					<td>나이</td>  
 					<td>주소</td>  
@@ -90,7 +92,9 @@ function timeBefore(){
 			</thead>  
 		<tbody>  
 			<c:forEach var="row" items="${data}">  
-				<tr>  
+				<tr>
+					<td>${row.id }
+					</td>  
 					<td>  
 						<a href="/detail?id=${row.id}">  
 							${row.name}  

@@ -73,7 +73,6 @@ public class CustomerController {
 		}  
 		return mav;  
 	}
-	
 	@RequestMapping(value = "/list")  
 	public ModelAndView list(@RequestParam Map<String, Object> map) {  
 		List<Map<String, Object>> list = this.customerService.list(map);  
@@ -115,4 +114,5 @@ public class CustomerController {
 		mav.setViewName("/customer/search3");  
 		return mav;  
 	} 
+
 }

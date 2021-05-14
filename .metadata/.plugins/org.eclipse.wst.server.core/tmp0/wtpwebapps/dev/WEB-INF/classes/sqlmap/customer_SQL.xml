@@ -12,7 +12,7 @@
     ]]>
 </insert>
 
-
+<!-- resultType이 hashMap이라는 것은 Map으로 결과를 보낸다는 것이다. -->
 <select id="select_detail" parameterType="hashMap" resultType="hashMap">
     <![CDATA[
         select
@@ -28,7 +28,6 @@
 </select>
 
 
-
 <update id="update" parameterType="hashMap">  
 	<![CDATA[  
 		update customer_spring_mvc set  
@@ -39,7 +38,6 @@
 		id = #{id}  
 	]]>  
 </update>  
-
 
 
 <delete id="delete" parameterType="hashMap">  
@@ -133,8 +131,8 @@
 		order by insert_date desc  
 </select>
 <!-- 게시물 총 갯수 -->
-<select id="count" resultType="int">
-	select count(id) from customer_spring_mvc
+<select id="count" resultType="int" >
+	select count(id) as tot from customer_spring_mvc
 </select>
 <!-- 게시물 총 갯수 -->
 <select id ="listPage" parameterType="hashMap" resultType="hashMap">
@@ -144,7 +142,7 @@
 	age,
 	adress,
 	insert_date,
-	TIMESTAMPDIFF(HOUR,insert_date,NOW()) AS time from
+	TIMESTAMPDIFF(HOUR,insert_date,NOW()) AS time
 	from 
 	customer_spring_mvc
 	order by insert_date

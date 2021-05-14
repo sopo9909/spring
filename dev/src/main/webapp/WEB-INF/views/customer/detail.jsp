@@ -38,6 +38,9 @@
 			<input type="submit" value="삭제" />
 		</form>
 	  <p>
+	  <button type="button" onclick="location.href='http://localhost:8080/create' ">생성</button>
+	  </p>
+	  <p>
 	  <button type="button" onclick="location.href='http://localhost:8080/list' ">목록으로</button>
 	  </p>
  </body>

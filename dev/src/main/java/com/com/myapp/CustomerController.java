@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 @Controller
 public class CustomerController {
 	// 서비스를 호출하기 위해 CustomerService를 의존성을 주입.
@@ -185,13 +187,63 @@ public class CustomerController {
 	}  
 	
 	@RequestMapping(value = "/search2")  
-	public ModelAndView search2(@RequestParam Map<String, Object> map) {  
-		List<Map<String, Object>> list = this.customerService.search2(map);  
-		ModelAndView mav = new ModelAndView();  
-		mav.addObject("data", list);  
+	public ModelAndView search2(@RequestParam Map<String, Object> map) {    
+		long systemTime = System.currentTimeMillis();
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+		SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sf3 = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+		SimpleDateFormat sf4 = new SimpleDateFormat("yyyy-MM-dd kk");
+		long s=0;
+		String s1;
+		ModelAndView mav = new ModelAndView();   
 		if(map.containsKey("keyword2")) {
-			mav.addObject("keyword2",map.get("keyword2"));
-		}
+			if("none".equals(map.get("keyword2"))) 
+			{s=systemTime;
+			 s1=sf.format(s);
+			 map.put("keyword2", s1);
+			 mav.addObject("keyword2",s1);
+			}
+			else if("15s".equals(map.get("keyword2")))	
+				{s= systemTime-15*1000;
+				 s1=sf.format(s);
+				 map.put("keyword2", s1);
+				 mav.addObject("keyword2",s1);
+				}
+			else if("30s".equals(map.get("keyword2")))
+				{s= systemTime-30*1000;
+				 s1=sf.format(s);
+				 map.put("keyword2", s1);
+				 mav.addObject("keyword2",s1);
+				}
+			else if("1m".equals(map.get("keyword2")))		
+				{s= systemTime-60*1000;
+				 s1=sf3.format(s);
+				 map.put("keyword2", s1);
+				 mav.addObject("keyword2",s1);
+				}
+			else if("30m".equals(map.get("keyword2")))	
+				{s= systemTime-1800*1000;
+				 s1=sf3.format(s);
+				 map.put("keyword2", s1);
+				 mav.addObject("keyword2",s1);
+				}
+			else if("1h".equals(map.get("keyword2")))		
+				{s= systemTime-3600*1000;
+				 s1=sf4.format(s);
+				 map.put("keyword2", s1);
+				 mav.addObject("keyword2",s1);
+				}
+			else if("1d".equals(map.get("keyword2")))		
+				{s= systemTime-86400*1000;
+				 s1=sf2.format(s);
+				 map.put("keyword2", s1);
+				 mav.addObject("keyword2",s1);
+			 	}
+			else{
+				mav.addObject("keyword2",map.get("keyword2"));}
+				}
+		List<Map<String, Object>> list = this.customerService.search2(map);
+		mav.addObject("data", list); 
 		mav.setViewName("/customer/search2");  
 		return mav;  
 	} 

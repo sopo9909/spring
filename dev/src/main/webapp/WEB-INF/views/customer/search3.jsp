@@ -3,18 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<script language="JavaScript">
-	function doBlink() {
-		var blink = document.all.tags("BLINK")
-		for (var i=0; i < blink.length; i++)
-		blink[i].style.visibility = blink[i].style.visibility == "" ? "hidden" : ""
-		}
-	function startBlink() {
-		if (document.all)
-			setInterval("doBlink()",800)
-		}
-	window.onload = startBlink;
-</script>
+
 <script>
 function timeBefore(){
 	 //현재시간

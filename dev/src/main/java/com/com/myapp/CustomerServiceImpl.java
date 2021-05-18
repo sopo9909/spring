@@ -20,11 +20,24 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		return null;
 	}
+	@Override
+	public String createD(Map<String,Object> map) {
+		int affectRowCount = this.customerDao.insert_d(map);
+		if (affectRowCount == 1) {
+			// map id를 가져와서 보내준다. 그러면 컨트롤러에서 id를 받는다.
+			return map.get("d_id").toString();
+		}
+		return null;
+	}
 	//컨트롤러에서 detail을 보내면 selectDetail이라는 것을 수행시킨다.
 	//이것은 Dao의 selectOne을 수행시킨다.
 	@Override
 	public Map<String,Object> detail(Map<String,Object> map){
 		return this.customerDao.selectDetail(map);
+	}
+	@Override
+	public Map<String,Object> detailD(Map<String,Object> map){
+		return this.customerDao.selectDetail_d(map);
 	}
 	//SqlSessionTemplate에서 반환된 값이 1이라서 affectRowCount가 1이 된다.
 	@Override  
@@ -32,17 +45,32 @@ public class CustomerServiceImpl implements CustomerService {
 	int affectRowCount = this.customerDao.update(map);  
 	return affectRowCount == 1;  
 	}  
+	@Override
+	public boolean editD(Map<String, Object> map) {  
+	int affectRowCount = this.customerDao.update_d(map);  
+	return affectRowCount == 1;  
+	} 
 	
 	@Override  
 	public boolean remove(Map<String, Object> map) {  
 	int affectRowCount = this.customerDao.delete(map);  
 	return affectRowCount == 1;  
-
 	}  
+	@Override  
+	public boolean removeD(Map<String, Object> map) {  
+	int affectRowCount = this.customerDao.delete_d(map);  
+	return affectRowCount == 1;  
+	}  
+	
+	
 	@Override  
 	public List<Map<String, Object>> list(Map<String, Object> map){  
 	return this.customerDao.selectList(map);  
 	}  
+	@Override
+	public List<Map<String, Object>> listD(Map<String, Object> map){  
+	return this.customerDao.selectList_d(map);  
+	}
 	@Override  
 	public List<Map<String, Object>> search(Map<String, Object> map){  
 	return this.customerDao.searchList(map);  

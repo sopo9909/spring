@@ -52,4 +52,25 @@ public class CustomerDao {
 		data.put("postNum",postNum);
 		return this.sqlSessionTemplate.selectList("customer.listPage",data);
 	}
+	public int insert_d(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return this.sqlSessionTemplate.insert("customer.insert_dash",map);
+	}
+	public int delete_d(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return this.sqlSessionTemplate.delete("customer.delete_dash", map);  
+	
+	}
+	public int update_d(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return this.sqlSessionTemplate.update("customer.update_dash", map);
+	}
+	public Map<String, Object> selectDetail_d(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return this.sqlSessionTemplate.selectOne("customer.select_detail_dash",map);
+	}
+	public List<Map<String, Object>> selectList_d(Map<String, Object> map) {
+		// TODO Auto-generated method stuba customer를 쓰는 이유는 바로 xml이 customer이기 때문이다.
+		return this.sqlSessionTemplate.selectList("customer.select_list_dash", map);
+	}
 }

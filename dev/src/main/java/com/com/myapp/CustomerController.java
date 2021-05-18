@@ -27,7 +27,6 @@ public class CustomerController {
 	public ModelAndView Create() {
 		return new ModelAndView("/customer/create");
 	}
-	
 		// 입력 후 저장 버튼을 누르면, 서버가 해야 하는 일을 정의하는 것
 		// RequestParam을 통해 쿼리 스트링 파라미터를 읽을 수 있게 한다.
 		// Map 인터페이스는 (key:value)형식의 저장 방식을 사용함.
@@ -37,7 +36,10 @@ public class CustomerController {
 		// Map<String,Object>는 Map을 선언하는 것이다.
 		// object는 변수가 아니라 그냥 모든 자료형을 언급한다.
 		// map.get("X").toString();은 map 데이터를 문자열에 셋팅
-		
+	@RequestMapping(value="/create_d",method=RequestMethod.GET)
+	public ModelAndView CreateD() {
+		return new ModelAndView("/dashboard/create");
+	}	
 	
 	@RequestMapping(value="/create",method = RequestMethod.POST)
 	public ModelAndView createPost(@RequestParam Map<String, Object> map) {
@@ -49,6 +51,21 @@ public class CustomerController {
 			mav.setViewName("redirect:/create");
 		}else {
 			mav.setViewName("redirect:/detail?id="+id);
+		}
+		//mav를 실행시킨다.
+		return mav;
+	}
+	
+	@RequestMapping(value="/create_d",method = RequestMethod.POST)
+	public ModelAndView createPostD(@RequestParam Map<String, Object> map) {
+		ModelAndView mav = new ModelAndView();
+		//생성을 하면 그거의 생성된 id를 가져온다. 그를 통해 디테일로 넘겨준다.
+		String id = this.customerService.createD(map);
+		if(id==null) {
+			//create를 주면 연결해줌
+			mav.setViewName("redirect:/create_d");
+		}else {
+			mav.setViewName("redirect:/detail_d?d_id="+id);
 		}
 		//mav를 실행시킨다.
 		return mav;
@@ -67,6 +84,22 @@ public class CustomerController {
 		String id = map.get("id").toString();
 		mav.addObject("id",id);//그다음에 id를 쓸 수 있도록 id를 넣어준다. 이 id는 jsp에서 사용된다.
 		mav.setViewName("/customer/detail");
+		return mav;
+	}
+	
+	@RequestMapping(value ="/detail_d",method=RequestMethod.GET)
+	public ModelAndView detailD(@RequestParam Map<String, Object>map) {
+		// Map형태로 오니까 detailMap이라고 변수를 만들어준다.
+		// Map<String, Object>를 map으로 한다.
+		// 예를 들어 id = 31 : id = key, 31 = value
+		// id 라는 키에 value값을 넣어준다. = #{id}
+		Map<String, Object> detailMap = this.customerService.detailD(map);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("data",detailMap);
+		//위에 것은 그대로 두고 map에서 뽑아온 것을 map.get("id).toString() 으로 해서 id를 뽑아온다 url 링크에서
+		String id = map.get("d_id").toString();
+		mav.addObject("d_id",id);//그다음에 id를 쓸 수 있도록 id를 넣어준다. 이 id는 jsp에서 사용된다.
+		mav.setViewName("/dashboard/detail");
 		return mav;
 	}
 	
@@ -151,6 +184,28 @@ public class CustomerController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/update_d",method=RequestMethod.GET)
+	public ModelAndView updateD(@RequestParam Map<String,Object>map) {
+		Map<String,Object> detailMap = this.customerService.detailD(map);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("data",detailMap);
+		mav.setViewName("/dashboard/update");
+		return mav;
+	}
+	
+	@RequestMapping(value ="/update_d",method =RequestMethod.POST)
+	public ModelAndView updatePostD(@RequestParam Map<String, Object>map) {
+		ModelAndView mav = new ModelAndView();
+		boolean isUpdateSuccess = this.customerService.editD(map);
+		if(isUpdateSuccess) {
+			String id = map.get("d_id").toString();
+			mav.setViewName("redirect:/detail_d?d_id="+id);
+		}else {
+			mav = this.update(map);
+		}
+		return mav;
+	}
+	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)  
 	public ModelAndView deletePost(@RequestParam Map<String, Object> map) {  
 		ModelAndView mav = new ModelAndView();  
@@ -165,12 +220,34 @@ public class CustomerController {
 		return mav;  
 	}
 	
+	@RequestMapping(value = "/delete_d", method = RequestMethod.POST)  
+	public ModelAndView deletePostD(@RequestParam Map<String, Object> map) {  
+		ModelAndView mav = new ModelAndView();  
+		boolean isDeleteSuccess = this.customerService.removeD(map);
+		//성공했으면 1이 들어올거야 delete에서 영향 받은 것이 된다 =1이기 때문에 가능함.
+		if (isDeleteSuccess) {  
+			mav.setViewName("redirect:/list_d");  
+		}else {  
+			String id = map.get("d_id").toString();  
+			mav.setViewName("redirect:/detail_d?d_id=" + id);  
+		}  
+		return mav;  
+	}
+	
 	@RequestMapping(value = "/list")  
 	public ModelAndView list(@RequestParam Map<String, Object> map) {  
 		List<Map<String, Object>> list = this.customerService.list(map);  
 		ModelAndView mav = new ModelAndView();  
 		mav.addObject("data", list);  
 		mav.setViewName("/customer/list");  
+		return mav;  
+	}
+	@RequestMapping(value = "/list_d")  
+	public ModelAndView listD(@RequestParam Map<String, Object> map) {  
+		List<Map<String, Object>> list = this.customerService.listD(map);  
+		ModelAndView mav = new ModelAndView();  
+		mav.addObject("data", list);  
+		mav.setViewName("/dashboard/list");  
 		return mav;  
 	}
 	

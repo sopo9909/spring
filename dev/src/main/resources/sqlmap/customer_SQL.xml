@@ -12,6 +12,73 @@
     ]]>
 </insert>
 
+<!-- 인서트 게시판 -->
+<insert id="insert_dash" parameterType="hashMap" useGeneratedKeys="true" keyProperty="id">  
+    <![CDATA[
+    insert into dashboard
+    (title, author, content) 
+    values
+    (#{title}, #{author}, #{content})
+    ]]>
+</insert>
+
+<!-- 조회 게시판 -->
+
+<select id="select_list_dash" parameterType="hashMap" resultType="hashMap">  
+	<![CDATA[  
+		select  
+		d_id,  
+		title,  
+		author,  
+		content,
+		insert_date  
+		from  
+		dashboard  
+		order by insert_date desc  
+	]]>  
+</select>  
+
+<!-- 업데이트 게시판 -->
+
+<update id="update_dash" parameterType="hashMap">  
+	<![CDATA[  
+		update dashboard set  
+		title = #{title},  
+		author = #{author},  
+		content = #{content}  
+		where  
+		d_id = #{d_id}  
+	]]>  
+</update>  
+
+
+<!--삭제 게시판 -->
+
+<delete id="delete_dash" parameterType="hashMap">  
+	<![CDATA[  
+		delete from dashboard  
+		where  
+		d_id = #{d_id}  
+	]]>  
+</delete> 
+
+<!--하나씩 조회 게시판 -->
+
+<select id="select_detail_dash" parameterType="hashMap" resultType="hashMap">
+    <![CDATA[
+        select
+        title,
+        author,
+        content,
+ 		insert_date
+        from
+        dashboard
+        where
+        d_id = #{d_id}   
+    ]]>
+</select>
+
+
 <!-- resultType이 hashMap이라는 것은 Map으로 결과를 보낸다는 것이다. -->
 <select id="select_detail" parameterType="hashMap" resultType="hashMap">
     <![CDATA[

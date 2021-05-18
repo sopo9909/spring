@@ -25,4 +25,14 @@ public interface CustomerService {
 
 	List<Map<String, Object>> listPage(int displayPost, int postNum);
 
+	String createD(Map<String, Object> map);
+
+	Map<String, Object> detailD(Map<String, Object> map);
+
+	boolean editD(Map<String, Object> map);
+
+	boolean removeD(Map<String, Object> map);
+
+	List<Map<String, Object>> listD(Map<String, Object> map);
+
 }

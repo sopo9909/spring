@@ -35,6 +35,13 @@
 			<p>
 				<button type="button" onclick="location.href='http://localhost:8080/listPage' "style="width:150px;height:50px;color:#FFFFFF;font-size:40;">카운트 구현</button>
 			</p>
+			<p>
+				<button type="button" onclick="location.href='http://localhost:8080/list_d' "style="width:150px;height:50px;color:#FFFFFF;font-size:40;">글 목록</button>
+			</p>
+			<p>
+				<button type="button" onclick="location.href='http://localhost:8080/create_d' "style="width:150px;height:50px;color:#FFFFFF;font-size:40;">글 생성</button>
+			</p>
+
 		</body>
 	</center>
 </html>
